@@ -1,16 +1,18 @@
 
 var fs = require('fs');
-var jade = require('jade');
+var http = require('http');
+var render = require('./scripts/render.js');
 
-var render = function(viewName, variables)
-{
-	jade.renderFile('views/' + viewName + '.jade', variables,
-		function (err, html) {
-			if (err) throw err;
-			document.getElementsByTagName('html')[0].innerHTML = html;
-		});
-}
 
 $(document).ready(function() {
-	render('index', {pageTitle: "Bonjour tout le monde!"});
+	render('index', document.children[0], {pageTitle: "Bonjour tout le monde!"});
 });
+
+
+// Remote Server
+var server = http.createServer(function(req, res) {
+
+	console.log("Request");
+	res.end('Coucou');
+
+}).listen(4242);
