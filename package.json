@@ -1,4 +1,7 @@
 {
   "name": "remoteNation-desktop",
-  "main": "index.html"
+  "main": "index.html",
+  "scripts": {
+  	"start": "zip app.nw index.html package.json && nodewebkit app.nw"
+  }
 }
