@@ -6,8 +6,7 @@ var authKey = null;
 
 // Go to login page by default
 $(document).ready(function() {
-	// Initializes Pages Renderer
-	pageRenderer = new (require('./scripts/PageRenderer.js'))(document.children[0]);
+	pageRenderer = new (require('./scripts/PageRenderer.js'))(document);
 	pageRenderer.login();
 });
 
@@ -26,7 +25,7 @@ function submitLogin()
 
 			authKey = data.auth_token;
 			pageRenderer.setCredentials(authKey);
-			pageRenderer.home();	
+			pageRenderer.home();
 
 		}).fail(function(a){
 			$('#message').text('Failed Identification');

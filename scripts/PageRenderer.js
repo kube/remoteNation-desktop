@@ -1,27 +1,38 @@
 var render = require('./render.js');
 var $ = require('./jquery-2.1.1.min.js');
 
-function loadMovies(auth_token)
+var https = require('https');
+
+function loadMovies(auth_token, container, callback)
 {
-	console.log(auth_token);
+	var options = {
+	    hostname: 'api.streamnation.com',
+	    port: 443,
+	    path: '/api/v1/movies?auth_token=' + auth_token,
+	    method: 'GET',
+	    headers: {
+	        'X-Milestone-Auth-Token' : '',
+	        'X-API-Version' : '1.1'
+	    }
+	};
 
-	var url = 'https://api.streamnation.com/api/v1/library?auth_token=' + auth_token;
-	console.log(url);
+	var req = https.request(options, function(res) {
+	    res.on('data', function(d) {
 
-	$.get(url,
-		function(data) {
+	        callback(JSON.parse(d));
+	    });
+	});
+	req.end();
 
-			console.log(data);
-
-		}).fail(function(a){
-			console.log(a);
-			$('body').text('Cannot reach user\'s library');
-		});
+	req.on('error', function(e) {
+	    console.error(e);
+	});
 }
 
-var PageRenderer = function(container){
+var PageRenderer = function(document){
 
 	var	_credentials;
+	var container = document.children[0];
 
 	this.setCredentials = function(auth_token)
 	{
@@ -35,11 +46,31 @@ var PageRenderer = function(container){
 
 	this.home = function()
 	{
-		render('index', container, { pageTitle: 'Bienvenue' },
-			function() {
-				loadMovies(_credentials);
-			});
+		this.movies();
 	};
+
+	this.movies = function ()
+	{
+		render('movies', container, { pageTitle: 'Bienvenue' },
+			function() {
+				loadMovies(_credentials, container, function(data) {
+					for (var i in data.movies) {
+						var item = document.createElement('li');
+
+						var label = document.createElement('label');
+						label.innerHTML = data.movies[i].name;
+
+						var image = document.createElement('img');
+						image.src = data.movies[i].covers[1].uri;
+
+						item.appendChild(image);
+						item.appendChild(label);
+						document.getElementById('moviesContainer').appendChild(item);
+					}
+			
+			});
+		});
+	}
 
 }
 

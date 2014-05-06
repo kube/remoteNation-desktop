@@ -1,0 +1,43 @@
+body
+{
+	background-color: #000;
+	color: #FFF;
+	font-family: "Helvetica", "Arial", sans-serif;
+}
+
+h1 {
+	font-family: 'Questrial', 'Helvetica', 'Arial', sans-serif;
+	font-weight: 100;
+	-webkit-user-select: none;
+	-webkit-app-region: drag;
+	text-align: center;
+}
+
+ul#moviesContainer
+{
+	width: 90%;
+	display: flex;
+	/*-webkit-flex-direction: column;*/
+	 justify-content: center;
+  align-items: center;
+	list-style: none;
+}
+
+ul#movieContainer li
+{
+	list-style: none;
+	width: 20%;
+	margin: 20px;
+	padding: 0;
+	min-width: 45px;
+	max-width: 130px;
+	display: inline-block;
+}
+
+ul#movieContainer li label,img
+{
+	width: 100%;
+	display: block;
+	margin: 0 auto;
+	text-align: center;
+}
