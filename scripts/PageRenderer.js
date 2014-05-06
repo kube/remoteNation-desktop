@@ -55,9 +55,11 @@ function startPlayer(document, uri)
 {
 	if (document.getElementById("player"))
 	{
-		// $('#player').hide();
+		//$('#player').hide();
+		// $("#player").playFile(uri, 0);
 		console.log(document.getElementById);
-		document.getElementById("player").playFile(uri, 0);
+// debugger
+		// document.getElementById("player").playFile(uri, 0);
 	}
 }
 
@@ -115,19 +117,9 @@ var PageRenderer = function(document){
 
 	this.moviePlayback = function (id)
 	{
-		render('playback', container, {movieId: id},
-			function()
-			{
-				getPlayback(_credentials, id, container, function(data) {
-					console.log("Playback");
-					console.log(data);
-
-					setTimeout(function(){
-						startPlayer(document, data.playback.playback_uri);
-					}, 1000);
-
-				});
-			});
+		getPlayback(_credentials, id, container, function(data) {
+			render('playback', container, {id: encodeURIComponent(data.playback.playback_uri)});
+		});
 	}
 
 }

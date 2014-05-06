@@ -43,7 +43,7 @@ trustManager.add(path.resolve('./scripts/', 'Player.swf'));
 // trustManager.remove(path.resolve('./scripts/', 'Player.swf'));
 
 // returns true or false whether given path is trusted or not
-var isTrusted = trustManager.isTrusted(path.resolve('./scripts/', 'Player.swf'));
+isTrusted = trustManager.isTrusted(path.resolve('./scripts/', 'Player.swf'));
 console.log(isTrusted);
 
 // returns array containing all trusted paths
@@ -52,10 +52,6 @@ console.log(list);
 
 // removes all trusted locations from config file
 // trustManager.empty();
-
-
-
-
 
 
 
