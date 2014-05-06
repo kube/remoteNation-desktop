@@ -5,9 +5,14 @@
   	"start": "rm -f app.nw && zip -r app.nw . && nodewebkit app.nw && rm app.nw"
   },
   "dependencies": {
-  	"jade": "*"
+  	"jade": "*",
+    "nw-flash-trust": "*"
+  },
+  "chromium-args": "--disable-web-security",
+  "webkit": {
+    "plugin": true
   },
   "window": {
-    "frame": false
+    "frame": true
   }
 }

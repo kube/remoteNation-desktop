@@ -3,7 +3,31 @@ var $ = require('./jquery-2.1.1.min.js');
 
 var https = require('https');
 
-function loadMovies(auth_token, container, callback)
+function getPlayback(auth_token, id, container, callback)
+{
+	var options = {
+	    hostname: 'api.streamnation.com',
+	    port: 443,
+	    path: '/api/v1/content/' + id + '/playback?auth_token=' + auth_token,
+	    method: 'GET',
+	    headers: {
+	        'X-Milestone-Auth-Token' : '',
+	        'X-API-Version' : '1.1'
+	    }
+	};
+	var req = https.request(options, function(res) {
+	    res.on('data', function(d) {
+
+	        callback(JSON.parse(d));
+	    });
+	});
+	req.end();
+	req.on('error', function(e) {
+	    console.error(e);
+	});
+}
+
+function getMoviesList(auth_token, container, callback)
 {
 	var options = {
 	    hostname: 'api.streamnation.com',
@@ -15,7 +39,6 @@ function loadMovies(auth_token, container, callback)
 	        'X-API-Version' : '1.1'
 	    }
 	};
-
 	var req = https.request(options, function(res) {
 	    res.on('data', function(d) {
 
@@ -23,10 +46,19 @@ function loadMovies(auth_token, container, callback)
 	    });
 	});
 	req.end();
-
 	req.on('error', function(e) {
 	    console.error(e);
 	});
+}
+
+function startPlayer(document, uri)
+{
+	if (document.getElementById("player"))
+	{
+		// $('#player').hide();
+		console.log(document.getElementById);
+		document.getElementById("player").playFile(uri, 0);
+	}
 }
 
 var PageRenderer = function(document){
@@ -51,9 +83,11 @@ var PageRenderer = function(document){
 
 	this.movies = function ()
 	{
+		var self = this;
+
 		render('movies', container, { pageTitle: 'Bienvenue' },
 			function() {
-				loadMovies(_credentials, container, function(data) {
+				getMoviesList(_credentials, container, function(data) {
 					for (var i in data.movies) {
 						var item = document.createElement('li');
 
@@ -62,14 +96,38 @@ var PageRenderer = function(document){
 
 						var image = document.createElement('img');
 						image.src = data.movies[i].covers[1].uri;
+						item.name = data.movies[i].contents[0].id;
 
 						item.appendChild(image);
 						item.appendChild(label);
+						item.addEventListener('click', function() {
+
+							console.log(this.name);
+							self.moviePlayback(this.name);
+
+						});
 						document.getElementById('moviesContainer').appendChild(item);
 					}
 			
 			});
 		});
+	}
+
+	this.moviePlayback = function (id)
+	{
+		render('playback', container, {movieId: id},
+			function()
+			{
+				getPlayback(_credentials, id, container, function(data) {
+					console.log("Playback");
+					console.log(data);
+
+					setTimeout(function(){
+						startPlayer(document, data.playback.playback_uri);
+					}, 1000);
+
+				});
+			});
 	}
 
 }

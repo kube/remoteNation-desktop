@@ -1,6 +1,8 @@
 var fs = require('fs');
 var http = require('http');
 var url = require('url');
+var path = require('path');
+var flashTrust = require('nw-flash-trust');
 
 var authKey = null;
 
@@ -9,6 +11,52 @@ $(document).ready(function() {
 	pageRenderer = new (require('./scripts/PageRenderer.js'))(document);
 	pageRenderer.login();
 });
+
+
+
+
+// appName could be any globally unique string containing only
+// big and small letters, numbers and chars "-._"
+// It specifies name of file where trusted paths will be stored.
+// Best practice is to feed it with "name" value from your package.json file.
+var appName = 'myApp';
+
+try {
+    // Initialization and parsing config file for given appName (if already exists).
+    var trustManager = flashTrust.initSync(appName);
+} catch(err) {
+	throw err;
+    if (err.message === 'Flash Player config folder not found.') {
+        // Directory needed to do the work doesn't exist.
+        // Probably Flash Player is not installed, there is nothing I can do.
+    }
+}
+
+// adds given filepath to trusted locations
+// paths must be absolute
+trustManager.add(path.resolve('./scripts/', 'Player.swf'));
+
+// whole folders are also allowed
+// trustManager.add(path.resolve('./scripts/', 'folder'));
+
+// removes given path from trusted locations
+// trustManager.remove(path.resolve('./scripts/', 'Player.swf'));
+
+// returns true or false whether given path is trusted or not
+var isTrusted = trustManager.isTrusted(path.resolve('./scripts/', 'Player.swf'));
+console.log(isTrusted);
+
+// returns array containing all trusted paths
+var list = trustManager.list();
+console.log(list);
+
+// removes all trusted locations from config file
+// trustManager.empty();
+
+
+
+
+
 
 
 function submitLogin()
