@@ -1,0 +1,13 @@
+extends layout
+
+block head
+	link(rel="stylesheet", href="styles/style.css")
+
+block content
+	h1 Login
+	h3#message Please Login
+	label(for='identity') Login
+	input(id='identityField', name='identity')
+	label(for='password') Password
+	input(id='passwordField', name='password', type='password')
+	button(onClick='submitLogin()')
