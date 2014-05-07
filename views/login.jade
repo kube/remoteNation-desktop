@@ -7,9 +7,11 @@ block head
 block content
 	h1 Login
 	h3#message Please Login
-	form(id='loginForm', action='return false;', onsubmit='return false;')
+	form#loginForm(action='return false;', onsubmit='return false;')
 		label(for='identity') Login
 		input(id='identityField', name='identity', value='kubekhrm@gmail.com')
 		label(for='password') Password
 		input(id='passwordField', name='password', type='password', value='remote')
 		button(type='submit')
+	h1.logotext RemoteNation
+	img(src='./images/logo.png')

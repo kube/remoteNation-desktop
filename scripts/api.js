@@ -38,10 +38,18 @@ var api = {
 		        'X-API-Version' : '1.1'
 		    }
 		};
+		var data = '';
 		var req = https.request(options, function(res) {
-		    res.on('data', function(d) {
+		    res.on('data', function(chunk) {
 
-		        callback(JSON.parse(d));
+		    	process.stdout.write(chunk);
+		    	data += chunk;
+		    });
+		    res.on('end', function() {
+
+		    	console.log('ok');
+		    	process.stdout.write(data);
+		        callback(JSON.parse(data));
 		    });
 		});
 		req.end();

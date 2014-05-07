@@ -1,13 +1,18 @@
+body
+{
+	overflow:hidden;
+}
+
 #playerContainer
 {
 	position: absolute;
-	z-index: 1;
-	border: 0;
-	margin:0;
+/*	z-index: 1;
+	/*border: 4px;*/
+/*	margin:0;
 	padding: 0;
 	top: 0px;
-	left: 0px;
-	bottom: 0px;
-	right: 0px;
-	width: 100%;
+	left: 0px;*/
+	/*bottom: 0px;*/
+	/*right: 0px;*/
+	/*width: 100%;*/
 }

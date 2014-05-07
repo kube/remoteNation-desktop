@@ -46,9 +46,8 @@ remote.get("/seek", function(req, res) {
 
 remote.start(4242);
 
-
 // Load PageRenderer
 $(document).ready(function() {
-	pageRenderer = new (require('./scripts/PageRenderer.js'))(document, remote);
+	pageRenderer = new (require('./scripts/PageRenderer.js'))(window, document, remote);
 	pageRenderer.login();
 });

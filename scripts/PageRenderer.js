@@ -4,7 +4,7 @@ var $ = require('./jquery.js');
 var sn = require('./api');
 var render = require('./render.js');
 
-var PageRenderer = function(document, remote){
+var PageRenderer = function(window, document, remote){
 
 	var self = this;
 	var	_credentials;
@@ -26,9 +26,6 @@ var PageRenderer = function(document, remote){
 						var identity = $('#identityField').val();
 						var password = $('#passwordField').val();
 
-						console.log(identity);
-						console.log(password);
-
 						var post_data = {
 								identity: identity,
 								password: password
@@ -46,19 +43,19 @@ var PageRenderer = function(document, remote){
 								'Content-Length': post_data.length
 						    }
 						};
+
 						var req = https.request(options, function(res) {
 						    res.on('data', function(d) {
 						    	data = JSON.parse(d);
-						    	process.stdout.write(d);
 						    	var authKey = data.auth_token;
 								self.setCredentials(authKey);
 								self.home();
 						    });
 						});
+
 						req.write(post_data);
 						req.end();
 						req.on('error', function(e) {
-						    console.error(e);
 							$('#message').text('Failed Identification');
 						});
 						return false;
@@ -104,7 +101,20 @@ var PageRenderer = function(document, remote){
 	this.moviePlayback = function (id)
 	{
 		sn.getPlayback(_credentials, id, container, function(data) {
-			render('playback', container, {id: encodeURIComponent(data.playback.playback_uri)});
+			render('playback',container,
+				{
+					id: encodeURIComponent(data.playback.playback_uri)
+				}, function() {
+					window.onresize = function()
+					{
+						if (document.getElementById('playerContainer'))
+						{
+							var frame = document.getElementById('playerContainer');
+							frame.setAttribute('height', window.height);
+							frame.setAttribute('width', window.width);
+						}
+					}
+				});
 		});
 	}
 
