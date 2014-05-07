@@ -25,14 +25,8 @@ for (var dev in ifaces) {
   });
 }
 
-
-
-
-
-moviesIndexes = new Array();
-
-
 currentRemoteRequests = new Array();
+moviesIndexes = new Array();
 
 
 
@@ -63,9 +57,9 @@ remote.get("/play", function(req, res) {
 
 	if (!player || (id && document.getElementById('playerContainer').movieId != id))
 	{
-		alertClients('play');
-		pageRenderer.moviePlayback(id);
 		alertClients(moviesIndexes[id]);
+		// alertClients('play');
+		pageRenderer.moviePlayback(id);
 	}
 	else if (document.getElementById('playerContainer'))
 	{
