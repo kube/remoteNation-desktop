@@ -4,7 +4,7 @@ var $ = require('./jquery.js');
 var sn = require('./api');
 var render = require('./render.js');
 
-var PageRenderer = function(window, document, remote){
+var PageRenderer = function(window, document, remote, moviesIndexes){
 
 	var self = this;
 	var	_credentials;
@@ -82,6 +82,8 @@ var PageRenderer = function(window, document, remote){
 					for (var i in data.movies) {
 						var item = document.createElement('li');
 						item.name = data.movies[i].contents[0].id;
+
+						moviesIndexes[data.movies[i].contents[0].id] = i;
 
 						var label = document.createElement('label');
 						label.innerHTML = data.movies[i].name;

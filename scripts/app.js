@@ -26,6 +26,12 @@ for (var dev in ifaces) {
 }
 
 
+
+
+
+moviesIndexes = new Array();
+
+
 currentRemoteRequests = new Array();
 
 
@@ -37,15 +43,13 @@ function alertClients(content) {
 
 	for (var i in currentRemoteRequests)
 	{
-
-		console.log("COCIUEWIJHBWEKJRWER WEJKHRHJKERWHJKEWRKHJEWRKHKHWERKHJRWEHKJWE");
 		currentRemoteRequests[i].writeHead(200, {
 			'Access-Control-Allow-Origin': '*',
 			'Content-Type': 'text/plain' });
 		currentRemoteRequests[i].end(content);
+		currentRemoteRequests.splice(i, 1);
 	}
 }
-
 
 
 remote.get("/play", function(req, res) {
@@ -61,6 +65,7 @@ remote.get("/play", function(req, res) {
 	{
 		alertClients('play');
 		pageRenderer.moviePlayback(id);
+		alertClients(moviesIndexes[id]);
 	}
 	else if (document.getElementById('playerContainer'))
 	{
@@ -118,6 +123,6 @@ remote.start(4242);
 
 // Load PageRenderer
 $(document).ready(function() {
-	pageRenderer = new (require('./scripts/PageRenderer.js'))(window, document, remote);
+	pageRenderer = new (require('./scripts/PageRenderer.js'))(window, document, remote, moviesIndexes);
 	pageRenderer.login();
 });
