@@ -1,6 +1,7 @@
 var RemoteServer = require('./scripts/RemoteServer.js');
 var authKey = null;
 var url = require('url');
+var http = require('http');
 
 console.log("Starting Player");
 
@@ -12,11 +13,12 @@ for (var dev in ifaces) {
   ifaces[dev].forEach(function(details){
     if (details.family=='IPv4') {
       // console.log(dev+(alias?':'+alias:''),details.address);
-      if (details.adress != '127.0.0.1')
+      if (details.address != '127.0.0.1')
       {
-      	// console.log(details.adress);
-	      console.log(details.adress)
-
+      	console.log(details.address);
+      	var reqSetIp = "http://10.12.4.2:1337/set?ip=" + details.address;
+      	console.log(reqSetIp);
+	      http.get(reqSetIp);
       }
       ++alias;
     }
