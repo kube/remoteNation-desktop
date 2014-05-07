@@ -25,8 +25,28 @@ for (var dev in ifaces) {
   });
 }
 
+
+currentRemoteRequests = new Array();
+
+
+
 // Configure Remote Server
 var remote = new RemoteServer();
+
+function alertClients(content) {
+
+	for (var i in currentRemoteRequests)
+	{
+
+		console.log("COCIUEWIJHBWEKJRWER WEJKHRHJKERWHJKEWRKHJEWRKHKHWERKHJRWEHKJWE");
+		currentRemoteRequests[i].writeHead(200, {
+			'Access-Control-Allow-Origin': '*',
+			'Content-Type': 'text/plain' });
+		currentRemoteRequests[i].end(content);
+	}
+}
+
+
 
 remote.get("/play", function(req, res) {
 	console.log("Playing");
@@ -38,12 +58,17 @@ remote.get("/play", function(req, res) {
 	var id = url.parse(req.url, true).query.id;
 
 	if (!player || (id && document.getElementById('playerContainer').movieId != id))
+	{
+		alertClients('play');
 		pageRenderer.moviePlayback(id);
+	}
 	else if (document.getElementById('playerContainer'))
 	{
 		var player = document.getElementById('playerContainer').contentWindow.document.getElementById('player');
-		if (player)
+		if (player){
+			alertClients('play');
 			player.play();
+		}
 	}
 });
 
@@ -58,18 +83,21 @@ remote.get("/pause", function(req, res) {
 	{
 		var player = document.getElementById('playerContainer').contentWindow.document.getElementById('player');
 		if (player)
+		{
+			alertClients('pause');
 			player.pause();
+		}
 	}
 });
 
 remote.get("/refresh", function(req, res) {
 	console.log("refresh");
-	res.writeHead(200, {
-		'Access-Control-Allow-Origin': '*',
-		'Content-Type': 'text/plain' });
-	setTimeout(function() {
-		res.end("Refresh");
-	}, 2000);
+	// res.writeHead(200, {
+	// 	'Access-Control-Allow-Origin': '*',
+	// 	'Content-Type': 'text/plain' });
+
+	currentRemoteRequests.push(res);
+
 });
 
 remote.get("/seek", function(req, res) {
@@ -80,7 +108,6 @@ remote.get("/seek", function(req, res) {
 		'Access-Control-Allow-Origin': '*',
 		'Content-Type': 'text/plain' });
 	res.end("Seek at " + position + "%");
-
 
 	// var player = document.getElementById('playerContainer').contentWindow.document.getElementById('player');
 	// if (player)
