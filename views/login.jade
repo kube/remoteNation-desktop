@@ -7,7 +7,7 @@ block head
 block content
 	h1 Login
 	h3#message Please Login
-	form(id='loginForm', action='#')
+	form(id='loginForm', action='return false;', onsubmit='return false;')
 		label(for='identity') Login
 		input(id='identityField', name='identity', value='kubekhrm@gmail.com')
 		label(for='password') Password

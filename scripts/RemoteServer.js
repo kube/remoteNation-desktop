@@ -1,7 +1,7 @@
 var http = require('http');
 var url = require('url');
 
-var RemoteServer = function(port)
+var RemoteServer = function()
 {
 	var _routes = new Array();
 	var _server = null;
@@ -19,7 +19,7 @@ var RemoteServer = function(port)
 		res.end('404');
 	}
 
-	this.start = function()
+	this.start = function(port)
 	{
 		console.log("Starting Remote Server");
 		_server = http.createServer(function(req, res) {
