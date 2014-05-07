@@ -13,6 +13,7 @@
     "plugin": true
   },
   "window": {
-    "frame": false
+    "frame": true,
+    "toolbar": false
   }
 }

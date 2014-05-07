@@ -17,7 +17,7 @@ var PageRenderer = function(window, document, remote, moviesIndexes){
 
 	this.login = function()
 	{
-		render('login', container, {pageTitle: "Bonjour tout le monde!"},
+		render('login', container, {pageTitle: "RemoteNation"},
 			function()
 			{
 				document.getElementById('loginForm').addEventListener('submit',
@@ -76,7 +76,7 @@ var PageRenderer = function(window, document, remote, moviesIndexes){
 	this.movies = function ()
 	{
 		var self = this;
-		render('movies', container, { pageTitle: 'Bienvenue' },
+		render('movies', container, { pageTitle: 'Movies' },
 			function() {
 				sn.getMoviesList(_credentials, container, function(data) {
 					for (var i in data.movies) {
@@ -111,6 +111,7 @@ var PageRenderer = function(window, document, remote, moviesIndexes){
 		sn.getPlayback(_credentials, id, container, function(data) {
 			render('playback',container,
 				{
+					pageTitle: 'Viewer',
 					id: encodeURIComponent(data.playback.playback_uri)
 				}, function() {
 					window.onresize = function()
