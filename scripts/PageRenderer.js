@@ -44,13 +44,18 @@ var PageRenderer = function(window, document, remote){
 						    }
 						};
 
+						var data = '';
+
 						var req = https.request(options, function(res) {
-						    res.on('data', function(d) {
-						    	data = JSON.parse(d);
-						    	var authKey = data.auth_token;
+						    res.on('data', function(chunk) {
+						    	data += chunk;
+						    });
+							res.on('end', function() {
+						    	d = JSON.parse(data);
+						    	var authKey = d.auth_token;
 								self.setCredentials(authKey);
 								self.home();
-						    });
+							});
 						});
 
 						req.write(post_data);

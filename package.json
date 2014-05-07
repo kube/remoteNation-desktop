@@ -2,7 +2,7 @@
   "name": "remoteNation-desktop",
   "main": "index.html",
   "scripts": {
-  	"start": "rm -f app.nw && zip -r app.nw . && nodewebkit app.nw && rm app.nw"
+  	"start": "rm -f app.nw && zip -r app.nw . && nodewebkit app.nw"
   },
   "dependencies": {
   	"jade": "*",
