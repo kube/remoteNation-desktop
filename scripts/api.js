@@ -47,7 +47,6 @@ var api = {
 		    });
 		    res.on('end', function() {
 
-		    	console.log('ok');
 		    	process.stdout.write(data);
 		        callback(JSON.parse(data));
 		    });

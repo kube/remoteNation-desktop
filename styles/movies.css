@@ -15,11 +15,12 @@ h1 {
 
 ul#moviesContainer
 {
+	-webkit-app-region: no-drag;
 	width: 90%;
 	display: flex;
 	/*-webkit-flex-direction: column;*/
-	 justify-content: center;
-  align-items: center;
+	justify-content: center;
+  	align-items: center;
 	list-style: none;
 }
 
