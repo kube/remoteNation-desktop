@@ -1,70 +1,10 @@
+var $ = require('./jquery.js');
+var sn = require('./api');
 var render = require('./render.js');
-var $ = require('./jquery-2.1.1.min.js');
-
-var https = require('https');
-
-function getPlayback(auth_token, id, container, callback)
-{
-	var options = {
-	    hostname: 'api.streamnation.com',
-	    port: 443,
-	    path: '/api/v1/content/' + id + '/playback?auth_token=' + auth_token,
-	    method: 'GET',
-	    headers: {
-	        'X-Milestone-Auth-Token' : '',
-	        'X-API-Version' : '1.1'
-	    }
-	};
-	var req = https.request(options, function(res) {
-	    res.on('data', function(d) {
-
-	        callback(JSON.parse(d));
-	    });
-	});
-	req.end();
-	req.on('error', function(e) {
-	    console.error(e);
-	});
-}
-
-function getMoviesList(auth_token, container, callback)
-{
-	var options = {
-	    hostname: 'api.streamnation.com',
-	    port: 443,
-	    path: '/api/v1/movies?auth_token=' + auth_token,
-	    method: 'GET',
-	    headers: {
-	        'X-Milestone-Auth-Token' : '',
-	        'X-API-Version' : '1.1'
-	    }
-	};
-	var req = https.request(options, function(res) {
-	    res.on('data', function(d) {
-
-	        callback(JSON.parse(d));
-	    });
-	});
-	req.end();
-	req.on('error', function(e) {
-	    console.error(e);
-	});
-}
-
-function startPlayer(document, uri)
-{
-	if (document.getElementById("player"))
-	{
-		//$('#player').hide();
-		// $("#player").playFile(uri, 0);
-		console.log(document.getElementById);
-// debugger
-		// document.getElementById("player").playFile(uri, 0);
-	}
-}
 
 var PageRenderer = function(document){
 
+	var self = this;
 	var	_credentials;
 	var container = document.children[0];
 
@@ -75,7 +15,32 @@ var PageRenderer = function(document){
 
 	this.login = function()
 	{
-		render('login', container, {pageTitle: "Bonjour tout le monde!"});
+		render('login', container, {pageTitle: "Bonjour tout le monde!"},
+			function()
+			{
+				document.getElementById('loginForm').addEventListener('submit',
+					function() {
+						console.log('submit');
+						var identity = $('#identityField').val();
+						var password = $('#passwordField').val();
+
+						$.post('https://api.streamnation.com/api/v1/auth',
+							{
+								identity: identity,
+								password: password
+							},
+							function(data) {
+
+								authKey = data.auth_token;
+								self.setCredentials(authKey);
+								self.home();
+
+							}).fail(function(a){
+								$('#message').text('Failed Identification');
+							});
+						return true;
+					});
+			});
 	};
 
 	this.home = function()
@@ -89,7 +54,7 @@ var PageRenderer = function(document){
 
 		render('movies', container, { pageTitle: 'Bienvenue' },
 			function() {
-				getMoviesList(_credentials, container, function(data) {
+				sn.getMoviesList(_credentials, container, function(data) {
 					for (var i in data.movies) {
 						var item = document.createElement('li');
 
@@ -117,7 +82,7 @@ var PageRenderer = function(document){
 
 	this.moviePlayback = function (id)
 	{
-		getPlayback(_credentials, id, container, function(data) {
+		sn.getPlayback(_credentials, id, container, function(data) {
 			render('playback', container, {id: encodeURIComponent(data.playback.playback_uri)});
 		});
 	}
