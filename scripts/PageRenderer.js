@@ -85,14 +85,19 @@ var PageRenderer = function(window, document, remote, moviesIndexes){
 
 						moviesIndexes[data.movies[i].contents[0].id] = i;
 
-						//var label = document.createElement('label');
-						//label.innerHTML = data.movies[i].name;
+						var titleMovie = document.createElement('h2');
+						titleMovie.innerHTML = data.movies[i].name;
+
+						var durationMovie = document.createElement('h3');
+						durationMovie.innerHTML = (data.movies[i]['contents'].duration / 60);
+
 
 						var image = document.createElement('img');
 						image.src = data.movies[i].covers[1].uri;
 
 						item.appendChild(image);
-						//item.appendChild(label);
+						item.appendChild(titleMovie);
+						item.appendChild(durationMovie);
 						item.addEventListener('click', function() {
 							console.log(this.name);
 							self.moviePlayback(this.name);

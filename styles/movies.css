@@ -1,81 +1,66 @@
-body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,textarea,p,blockquote,th,td { 
- margin:0;
- padding:0;
-}
-table {
- border-collapse:collapse;
- border-spacing:0;
-}
-fieldset,img { 
- border:0;
-}
-address,caption,cite,code,dfn,em,strong,th,var {
- font-style:normal;
- font-weight:normal;
-}
-ol,ul {
- list-style:none;
-}
-caption,th {
- text-align:left;
-}
-h1,h2,h3,h4,h5,h6 {
- font-size:100%;
- font-weight:normal;
-}
-q:before,q:after {
- content:'';
-}
-abbr,acronym { border:0;
-}
 
-
-body
+h1
 {
-	background-color: #000;
-	color: #FFF;
-	font-family: "Helvetica", "Arial", sans-serif;
-	display: absolute;
-	top: 0; left: 0; right: 0; bottom: 0;
-	overflow-x: hidden;
-	overflow-y: scroll;
-}
-
-h1 {
-	font-family: 'Questrial', 'Helvetica', 'Arial', sans-serif;
-	font-weight: 100;
-	-webkit-user-select: none;
-	-webkit-app-region: drag;
-	text-align: center;
+	margin: 20px auto;
+	font-size: 2em;
 }
 
 ul#moviesContainer
 {
 	-webkit-app-region: no-drag;
-	width: 100%;
-	display: absolute;
+	min-width: 100%;
+	position: absolute;
 	top: 10%; left: 0; right: 0; bottom: 0;
-	/*-webkit-flex-direction: column;*/
 	list-style: none;
 	text-align: center;
-	background: #383;
 }
 
 ul#moviesContainer li
 {
 	list-style: none;
+	vertical-align: middle;
+	position: relative;
 	width: 20vw;
-	margin: 10px;
+	height: 30vw;
+	margin: 0 10px 60px 10px;
 	padding: 0;
-	min-width: 45px;
-	max-width: 130px;
+	min-width: 150px;
+	max-width: 250px;
+	min-height: 225px;
+	max-height: 375px;
 	display: inline-block;
+	cursor: pointer;
+}
+
+ul#moviesContainer li h2
+{
+	color: #fff;
+	position: absolute;
+	bottom: -25px;
+	z-index: 100;
 }
 
 ul#moviesContainer li img
 {
 	width: 100%;
+	height: 100%;
 	display: block;
 	margin: 0 auto;
 	text-align: center;
+	position: relative;
+	z-index: 80;
+	border: 1px solid;
+	border-radius: 5px;
+	border-color: #000;
+}
+
+ul#moviesContainer .selected:after, ul#moviesContainer li:hover:after
+{
+	background: rgba(0,0,0,0.4) url(../images/eye.png) no-repeat center center;
+	content: "";
+	position: absolute;
+	top: 0; left: 0; right: 0; bottom: 0;
+	width: 100%;
+	height: 100%;
+	clear: both;
 }
