@@ -112,6 +112,11 @@ var PageRenderer = function(window, document, remote, moviesIndexes){
 	{
 		console.log(id);
 		sn.getPlayback(_credentials, id, container, function(data) {
+
+			console.log(data);
+
+			// debugger;
+
 			render('playback',container,
 				{
 					pageTitle: 'Viewer',
@@ -121,10 +126,10 @@ var PageRenderer = function(window, document, remote, moviesIndexes){
 					{
 						if (document.getElementById('playerContainer'))
 						{
-							var frame = document.getElementById('playerContainer');
-							frame.movieId = id;
-							frame.setAttribute('height', window.height);
-							frame.setAttribute('width', window.width);
+							// var frame = document.getElementById('playerContainer');
+							// frame.movieId = id;
+							// frame.setAttribute('height', window.height);
+							// frame.setAttribute('width', window.width);
 						}
 					}
 				});
