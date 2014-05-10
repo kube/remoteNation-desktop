@@ -85,19 +85,17 @@ var PageRenderer = function(window, document, remote, moviesIndexes){
 
 						moviesIndexes[data.movies[i].contents[0].id] = i;
 
-						var label = document.createElement('label');
-						label.innerHTML = data.movies[i].name;
+						//var label = document.createElement('label');
+						//label.innerHTML = data.movies[i].name;
 
 						var image = document.createElement('img');
 						image.src = data.movies[i].covers[1].uri;
 
 						item.appendChild(image);
-						item.appendChild(label);
+						//item.appendChild(label);
 						item.addEventListener('click', function() {
-
 							console.log(this.name);
 							self.moviePlayback(this.name);
-
 						});
 						document.getElementById('moviesContainer').appendChild(item);
 					}

@@ -13,7 +13,7 @@ for (var dev in ifaces) {
   ifaces[dev].forEach(function(details){
     if (details.family=='IPv4') {
       // console.log(dev+(alias?':'+alias:''),details.address);
-      if (details.address != '127.0.0.1')
+      if (false && details.address != '127.0.0.1')
       {
       	console.log(details.address);
       	var reqSetIp = "http://10.12.4.2:1337/set?ip=" + details.address;
