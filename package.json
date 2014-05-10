@@ -2,7 +2,8 @@
   "name": "remoteNation-desktop",
   "main": "index.html",
   "scripts": {
-  	"start": "rm -f app.nw && zip -r app.nw . && forever start master.js && nodewebkit app.nw && forever stop master.js"
+    "start": "rm -f app.nw && zip -r app.nw . && nodewebkit app.nw"
+  	
   },
   "dependencies": {
   	"jade": "*",
@@ -13,7 +14,7 @@
     "plugin": true
   },
   "window": {
-    "frame": true,
-    "toolbar": true
+    "frame": false,
+    "toolbar": false
   }
 }

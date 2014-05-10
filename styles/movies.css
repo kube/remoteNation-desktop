@@ -30,14 +30,39 @@ ul#moviesContainer li
 	max-height: 375px;
 	display: inline-block;
 	cursor: pointer;
+	-webkit-transition-property: all;
+	-webkit-transition-duration:5s;
+}
+
+ul#moviesContainer .selected:after, ul#moviesContainer li:after
+{
+	content: "";
+	position: absolute;
+	top: 0; left: 0; right: 0; bottom: 0;
+	width: 100%;
+	height: 100%;
+	-webkit-transition-property: all;
+	-webkit-transition-duration: 0.2s;
+	-webkit-transform: rotate(0deg);
+	z-index: 45;
+	border: 1px solid;
+	border-radius: 5px;
+	border-color: #000;
+	background: rgba(0,0,0,0) no-repeat center center;
+	background-size: 0;
 }
 
 ul#moviesContainer li h2
 {
-	color: #fff;
+	color: #8f8f8f;
 	position: absolute;
-	bottom: -25px;
-	z-index: 100;
+	bottom: -28px;
+	padding: 20px 0 5px 0;
+	width: 80%;
+	left: 10%;
+	background-color: #161616;
+	border-radius: 10px;
+	display: block;
 }
 
 ul#moviesContainer li img
@@ -48,7 +73,7 @@ ul#moviesContainer li img
 	margin: 0 auto;
 	text-align: center;
 	position: relative;
-	z-index: 80;
+	z-index: 42;
 	border: 1px solid;
 	border-radius: 5px;
 	border-color: #000;
@@ -56,11 +81,7 @@ ul#moviesContainer li img
 
 ul#moviesContainer .selected:after, ul#moviesContainer li:hover:after
 {
-	background: rgba(0,0,0,0.4) url(../images/eye.png) no-repeat center center;
-	content: "";
-	position: absolute;
-	top: 0; left: 0; right: 0; bottom: 0;
-	width: 100%;
-	height: 100%;
-	clear: both;
+	background: rgba(0,0,0,0.1) url(../images/eye.png) no-repeat center center;
+	box-shadow: inset 0 0 25px rgba(0,0,0,0.85);
+	background-size: 55%;
 }
