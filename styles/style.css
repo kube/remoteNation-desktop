@@ -2,35 +2,19 @@ body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,textarea,p,
  margin:0;
  padding:0;
 }
-table {
- border-collapse:collapse;
- border-spacing:0;
+table { border-collapse:collapse; border-spacing:0;}
+fieldset,img {  border:0;}
+address,caption,cite,code,dfn,em,strong,th,var { font-style:normal; font-weight:normal;
 }
-fieldset,img { 
- border:0;
-}
-address,caption,cite,code,dfn,em,strong,th,var {
- font-style:normal;
- font-weight:normal;
-}
-ol,ul {
- list-style:none;
-}
-caption,th {
- text-align:left;
-}
-h1,h2,h3,h4,h5,h6 {
- font-size:100%;
- font-weight:normal;
-}
-q:before,q:after {
- content:'';
-}
-abbr,acronym { border:0;
-}
+ol,ul { list-style:none;}
+caption,th { text-align:left;}
+h1,h2,h3,h4,h5,h6 { font-size:100%; font-weight:normal;}
+q:before,q:after { content:'';}
+abbr,acronym { border:0;}
 
 html
 {
+	background-color: #252525;
 	position: absolute;
 	top: 0; left: 0; right: 0; bottom: 0;
 	overflow: hidden;
@@ -39,7 +23,7 @@ html
 body
 {
 	background-color: #252525;
-	box-shadow: inset 0 0 250px rgba(0,0,0,0.6);
+	box-shadow: inset 0 0 250px rgba(0,0,0,0.2);
 	color: #FFF;
 	font-family: "Helvetica", "Arial", sans-serif;
 	position: absolute;
@@ -66,10 +50,16 @@ h1 {
     background-color: #ccc;  
 }
 
+@font-face
+{
+    font-family: "texgyreadventor";
+    src: url('../fonts/texgyreadventor-regular.otf');
+}
+
 #content
 {
 	position: absolute;
-	top: 60px; left: 0; right: 0; bottom: 0;
+	top: 30px; left: 0; right: 0; bottom: 0;
 	overflow-x: hidden;
 	overflow-y: scroll;
 }
@@ -78,14 +68,76 @@ h1 {
 {
 	position: absolute;
 	top: 0; left: 0; right: 0; bottom: 0;
-	height: 60px; width: 100%;
+	height: 30px; line-height: 30px; width: 100%;
+	margin: 0;
+	padding: 0;
+	vertical-align: middle;
+	color: #BBB;
+	font-family: "texgyreadventor", Arial;
+	font-size: 1.2em;
 	background-color: #252525;
 	text-align: center;
-	box-shadow: 0 0 50px rgba(0,0,0,0.7);
+	box-shadow: 0 0 20px rgba(0,0,0,0.6);
 	background: -webkit-linear-gradient(
         top,
         #252525,
-        #1a1a1a
+        #1e1e1e
     );
-
+	z-index: 999;
 }
+
+#btn_head_close, #btn_head_resize, #btn_head_hide
+{
+	content: '';
+	background: #0f0f0f;
+	border: 0px solid #000;
+	padding: 0;
+	width: 14px;
+	height: 14px; line-height: 3px;
+	top: 8px; right: 8px;
+	font-size: xx-small;
+	overflow: hidden;
+	position: absolute;
+	border-radius: 7px;
+	-webkit-transition-property: all;
+	-webkit-transition-duration: 0.3s;
+	color: #CCC;
+}
+
+#btn_head_resize{	right: 28px;}
+#btn_head_hide{	right: 48px;}
+#btn_head_close:hover{	background: #b00f0f;}
+#btn_head_resize:hover{	background: #0fb00f;}
+#btn_head_hide:hover{	background: #d0a00f;}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

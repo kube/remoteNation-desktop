@@ -1,9 +1,14 @@
+var gui = require('nw.gui');
+var win = gui.Window.get();
+win.title = "Remote Nation";
+win.width = 1200;
+win.height = 800;
+
 var RemoteServer = require('./scripts/RemoteServer.js');
 var authKey = null;
 var url = require('url');
 var http = require('http');
 
-console.log("Starting Player");
 
 // Store current IP Adress
 var os = require('os');
@@ -29,6 +34,20 @@ currentRemoteRequests = new Array();
 moviesIndexes = new Array();
 
 
+function btn_close()
+{
+	gui.App.quit();
+}
+
+function btn_resize()
+{
+	win.toggleFullscreen();
+}
+
+function btn_hide()
+{
+	win.minimize();
+}
 
 // Configure Remote Server
 var remote = new RemoteServer();
