@@ -13,8 +13,9 @@
   "webkit": {
     "plugin": true
   },
-  "window": {
-    "frame": false,
-    "toolbar": false
+  "window":{
+	"frame": false,
+	"toolbar": false,
+	"icon": "images/logo.png"
   }
 }

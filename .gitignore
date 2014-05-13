@@ -1,2 +1,4 @@
 node_modules
 app.nw
+.DS_Store
+build/*

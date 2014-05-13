@@ -22,7 +22,7 @@ ul#moviesContainer li
 	position: relative;
 	width: 20vw;
 	height: 30vw;
-	margin: 0 10px 60px 10px;
+	margin: 0 10px 50px 10px;
 	padding: 0;
 	min-width: 150px;
 	max-width: 250px;
@@ -31,7 +31,7 @@ ul#moviesContainer li
 	display: inline-block;
 	cursor: pointer;
 	-webkit-transition-property: all;
-	-webkit-transition-duration:5s;
+	-webkit-transition-duration: 0.5s;
 }
 
 ul#moviesContainer .selected:after, ul#moviesContainer li:after
